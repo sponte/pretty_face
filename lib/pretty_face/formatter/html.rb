@@ -45,18 +45,23 @@ module PrettyFace
       
       def embed(src, mime_type, label)
         case(mime_type)
-        when /^image\/(png|gif|jpg|jpeg)/
-          embed_image(src, label)
+          when /^image\/(png|gif|jpg|jpeg)/
+            embed_image(src, label)
         end
       end
 
       def embed_image(src, label)
-        @report.current_scenario.image = src.split(separator).last
+        @report.current_scenario.image = src
         @report.current_scenario.image_label = label
         @report.current_scenario.image_id = "img_#{@img_id}"
         @img_id += 1
-        filename = "#{File.dirname(@path)}#{separator}images"
-        FileUtils.cp src, filename
+
+        # only copy an image if we have to
+        unless src =~ /^data:/
+          @report.current_scenario.image = src.split(separator).last
+          filename = "#{File.dirname(@path)}#{separator}images"
+          FileUtils.cp src, filename
+        end
       end
 
       def before_features(features)

@@ -83,6 +83,12 @@ Feature: pages that show details for features
     And the file "results/basic.html" should contain "img=document.getElementById('img_0'); img.style.display = (img.style.display == 'none' ? 'block' : 'none');return false"
     And the file "results/basic.html" should contain ">AutoTrader</a>"
 
+  Scenario: Embedding base64 image into the page
+    Then the file "results/basic.html" should contain "<img id='img_1' style='display: none' src='data:image/png;base64,"
+    And the file "results/basic.html" should contain "<a href='' onclick="
+    And the file "results/basic.html" should contain "img=document.getElementById('img_0'); img.style.display = (img.style.display == 'none' ? 'block' : 'none');return false"
+    And the file "results/basic.html" should contain ">AutoTrader</a>"
+
   Scenario: Displaying a background
     Then the file "results/background.html" should contain "Background: A scenario can have a background"
     And the file "results/background.html" should contain "When  Cucumber puts"

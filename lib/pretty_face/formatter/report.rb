@@ -161,12 +161,25 @@ module PrettyFace
       end
     end
 
+    class ReportImage
+      attr_accessor :src, :label, :id
+
+      def path(directory_prefix)
+        if src =~ /^data:/
+          src
+        else
+          "#{directory_prefix}images/#{src}"
+        end
+      end
+    end
+
     class ReportScenario
-      attr_accessor :name, :file_colon_line, :status, :steps, :duration, :image, :image_label, :image_id
+      attr_accessor :name, :file_colon_line, :status, :steps, :duration, :images, :image_label, :image_id
 
       def initialize(scenario)
         @steps = []
         @start = Time.now
+        @images = []
       end
 
       def populate(scenario)
@@ -181,8 +194,8 @@ module PrettyFace
         @status = scenario.status
       end
 
-      def has_image?
-        not image.nil?
+      def has_images?
+        not images.empty?
       end
     end
 

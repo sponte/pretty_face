@@ -51,17 +51,21 @@ module PrettyFace
       end
 
       def embed_image(src, label)
-        @report.current_scenario.image = src
-        @report.current_scenario.image_label = label
-        @report.current_scenario.image_id = "img_#{@img_id}"
+        report_image = ReportImage.new
+        report_image.src = src
+        report_image.label = label
+        report_image.id = "img_#{@img_id}"
+
         @img_id += 1
 
         # only copy an image if we have to
         unless src =~ /^data:/
-          @report.current_scenario.image = src.split(separator).last
+          report_image.src = src.split(separator).last
           filename = "#{File.dirname(@path)}#{separator}images"
           FileUtils.cp src, filename
         end
+
+        @report.current_scenario.images << report_image
       end
 
       def before_features(features)

@@ -21,10 +21,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency "actionpack", ">= 3.2.13"
   s.add_dependency "syntax"
+  s.add_dependency "cucumber"
 
-  s.add_development_dependency "cucumber"
   s.add_development_dependency "rspec"
   s.add_development_dependency "aruba"
-
-  s.add_runtime_dependency "cucumber"
 end

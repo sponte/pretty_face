@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "pretty_face/version"
 
 Gem::Specification.new do |s|
-  s.name        = "pretty_face"
+  s.name        = "sponte_pretty_face"
   s.version     = PrettyFace::VERSION
   s.license     = 'MIT'
   s.authors     = ["Jeffrey S. Morgan", "Joel Byler", "Steve Jackson", "Sahithya Wintrich", "Carl Shotwell"]
